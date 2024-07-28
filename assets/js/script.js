@@ -25,11 +25,19 @@ document.addEventListener("DOMContentLoaded", function () {
 function runGame(gameType) {
     let num1 = Math.floor(Math.random() * 25) + 1;
     let num2 = Math.floor(Math.random() * 25) + 1;
+    console.log(num1 , num2);
 
     if (gameType === "addition") {
         displayAdditionQuestion(num1, num2);
     } else if (gameType === "multiply") {
         displayMultiplyQuestion(num1, num2);
+    } else if (gameType === "subtract") {
+        displaySubtractionQuestion(num1, num2);
+        // if (num1 > num2) {
+        //     displaySubtractionQuestion(num1, num2);
+        // } else {
+        //     displaySubtractionQuestion(num2, num1);
+        // }
     } else {
         alert(`Unknown game type: ${gameType}`);
         throw `Unknown game type: ${gameType}. Aborting!`;
@@ -72,6 +80,8 @@ function calculateCorrectAnswer() {
         return [operand1 + operand2, "addition"];
     } else if (operator === 'X') {
         return [operand1 * operand2, "multiply"];
+    } else if (operator === '-') {
+        return [operand1 - operand2, "subtract"];
     } else {
         alert(`Unimplemented operator ${operator}`);
         throw `Unimplemented operator ${operator}. Aborting.`;
@@ -104,10 +114,12 @@ function displayAdditionQuestion(operand1, operand2) {
     document.getElementById('operand2').textContent = operand2;
     document.getElementById('operator').textContent = '+';
 
-
 }
 
-function displaySubtractionQuestion() {
+function displaySubtractionQuestion(operand1, operand2) {
+    document.getElementById('operand1').textContent = operand1 > operand2 ? operand1 : operand2;
+    document.getElementById('operand2').textContent = operand1 > operand2 ? operand2 : operand1;
+    document.getElementById('operator').textContent = '-';
 
 }
 
